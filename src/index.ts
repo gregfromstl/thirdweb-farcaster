@@ -6,7 +6,7 @@ import {
 import { sendAndConfirmTransaction } from "thirdweb/transaction";
 import { privateKeyAccount } from "thirdweb/wallets";
 import {
-    createSigner,
+    createEd25519Keypair,
     getRegistrationPrice,
     getUsdRegistrationPrice,
     registerFid,
@@ -62,7 +62,7 @@ async function main() {
     });
     console.log("Successfully ran registerFid | FID:", appFid);
 
-    const signer = await createSigner();
+    const signer = await createEd25519Keypair();
 
     const userAccount = privateKeyAccount({
         client,
@@ -88,7 +88,7 @@ async function main() {
     });
     console.log("Successfully ran registerFidAndSigner | User FID:", userFid);
 
-    const newSigner = await createSigner();
+    const newSigner = await createEd25519Keypair();
     const _addSigner = addSigner({
         client,
         chain: anvil,
@@ -101,7 +101,7 @@ async function main() {
     });
     console.log("Successfully ran addSigner");
 
-    const anotherNewSigner = await createSigner();
+    const anotherNewSigner = await createEd25519Keypair();
     const _addSignerFor = addSignerFor({
         client,
         chain: anvil,
@@ -117,7 +117,7 @@ async function main() {
 
     // Test externally generated signature usage //
     const deadline = Date.now() + 1000 * 60 * 60 * 24;
-    const aWildSignerAppeared = await createSigner();
+    const aWildSignerAppeared = await createEd25519Keypair();
     const signedKeyRequestData = getKeyRequestData({
         requestFid: appFid,
         key: aWildSignerAppeared.publicKey,
