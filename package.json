@@ -9,7 +9,7 @@
         "start": "tsx src/index.ts"
     },
     "dependencies": {
-        "thirdweb": "^0.13.52"
+        "thirdweb": "^5.15.0"
     },
     "devDependencies": {
         "@types/node": "^20.11.28",
